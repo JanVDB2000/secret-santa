@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h2 class="mb-4 text-xl font-semibold">Secret Santa Results</h2>
+        <p class="text-xl font-semibold mb-2">Matched Participants:</p>
+        <ul class="list-group">
+            {% for giver, receiver in matchedParticipants %}
+                <li class="list-group-item col-span-6 border-t border-b">
+                    <span class="font-bold text-primary">{{ giver }}</span>
+                    gives a gift to
+                    <span class="font-bold text-green-500">{{ receiver }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

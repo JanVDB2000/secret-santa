@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        {{ form_start(form, {'attr': {'class': 'form'}}) }}
+
+        <div id="participants" data-prototype="{{ form_widget(form.participants.vars.prototype)|e }}">
+            {% for participantForm in form.participants %}
+                <div class="mb-2">
+                    {{ form_row(participantForm.name) }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="my-10">
+            <button type="button" class="bg-blue-500 text-white py-2 px-4 rounded-md mr-2" id="add_participant">Add Participant</button>
+            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Submit</button>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+
+    <script>
+        // Add Participant button functionality
+        document.getElementById('add_participant').addEventListener('click', function () {
+            const collectionHolder = document.getElementById('participants');
+            const prototype = collectionHolder.getAttribute('data-prototype');
+            const index = collectionHolder.children.length;
+            const newForm = prototype.replace(/__name__/g, index);
+            collectionHolder.innerHTML += newForm;
+        });
+    </script>
+{% endblock %}
